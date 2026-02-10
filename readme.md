@@ -1,0 +1,100 @@
+# 💭 MoodQuotes
+
+> **Random Quotes Generator** based on your mood and preferred language.
+
+---
+
+## 👥 Project Team
+
+**Project Leader:** Muhammad Mahasa Relung P
+
+| Branch / Focus     | Team Member              |
+| :----------------- | :----------------------- |
+| **UI/Layout**      | Hafiz Hamidy Sugianto    |
+| **Quote Logic**    | Muhammad Mahasa Relung P |
+| **Extra Features** | Rifky Nurfaishal         |
+
+---
+
+## ✨ Features
+
+- 🌓 **Dark/Light Mode** - Theme toggle with localStorage persistence
+- 🌐 **Bilingual** - Quotes available in Indonesian & English
+- 🎲 **Smart Randomizer** - No consecutive repeated quotes
+- 📋 **One-Click Copy** - Instantly copy quotes to clipboard
+- 🎨 **Modern UI** - Glassmorphism design with smooth animations
+- ⌨️ **Keyboard Support** - ESC to close modal
+
+---
+
+## 🚀 How to Run
+
+Clone the repository first:
+
+```bash
+git clone https://github.com/username/quotes-generator.git
+cd quotes-generator
+```
+
+Then simply open `index.html` in your favorite browser:
+
+```bash
+start index.html        # Windows
+open index.html         # macOS
+xdg-open index.html     # Linux
+```
+
+**No installation, build, or server required!** This project is pure HTML + CSS + JS.
+
+---
+
+## 📁 Folder Structure
+
+```
+quotes-generator/
+├── index.html      # Main entry point
+├── script.js       # Logic & quotes data
+└── README.md       # Documentation
+```
+
+---
+
+## 🎭 Available Moods
+
+| Mood    | Key       | Emoji |
+| :------ | :-------- | :---- |
+| Sad     | `sad`     | 😢    |
+| Happy   | `happy`   | 😊    |
+| Neutral | `neutral` | 😐    |
+| Angry   | `angry`   | 😠    |
+
+---
+
+## ♿ Accessibility
+
+- ✅ **ESC** to close modal
+- ✅ Light focus trap on modal (focus on primary button)
+- ✅ Semantic HTML with clear labels
+- ✅ Adequate color contrast for both themes
+- ✅ `aria-label` on icon buttons
+
+---
+
+## 🛠️ Tech Stack
+
+- **HTML5** - Semantic structure
+- **Tailwind CSS v4** - Styling via CDN
+- **Vanilla JavaScript** - No frameworks/libraries
+- **Google Fonts (Inter)** - Modern typography
+
+---
+
+## 📝 Notes
+
+- Quotes are stored directly in `script.js` (no database)
+- Theme preference is saved in `localStorage`
+- Last quote index per mood/language is stored in memory (resets on refresh)
+
+<p align="center">
+  Made with 💜 by <strong>MHR Developer</strong>
+</p>
