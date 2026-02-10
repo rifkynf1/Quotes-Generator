@@ -10,30 +10,102 @@
 const QUOTES = {
   id: {
     sad: [
-      "Terkadang air mata adalah kata-kata yang tidak bisa diucapkan hati."
+      "Terkadang air mata adalah kata-kata yang tidak bisa diucapkan hati.",
+      "Kesedihan adalah cara hidup memberikanmu waktu untuk menghargai kebahagiaan.",
+      "Dalam kegelapan, bintang-bintang terlihat lebih terang.",
+      "Setiap air mata yang jatuh mengajarkan kita untuk lebih kuat.",
+      "Rasa sakit hari ini adalah kekuatan esok hari.",
+      "Hujan tidak akan selamanya, begitu juga dengan kesedihanmu.",
+      "Luka yang sembuh meninggalkan bekas yang mengingatkan kita betapa kuatnya kita.",
+      "Kadang kita harus hancur agar bisa membangun diri yang lebih baik.",
+      "Di balik setiap kesedihan, ada pelajaran yang menunggu dipetik.",
+      "Biarkan dirimu merasakan, kemudian biarkan dirimu sembuh."
     ],
     happy: [
-      "Kebahagiaan bukan tentang memiliki segalanya, tapi mensyukuri apa yang ada."
+      "Kebahagiaan bukan tentang memiliki segalanya, tapi mensyukuri apa yang ada.",
+      "Senyum adalah bahasa universal yang dipahami semua orang.",
+      "Hari ini adalah hadiah, itulah mengapa disebut 'present'.",
+      "Kebahagiaan berlipat ganda ketika kita berbagi.",
+      "Setiap hari adalah kesempatan baru untuk bahagia.",
+      "Hidup terlalu singkat untuk tidak dinikmati setiap momennya.",
+      "Kebahagiaan datang dari dalam, bukan dari luar.",
+      "Tertawa adalah obat terbaik yang tidak perlu resep dokter.",
+      "Syukuri prosesnya, nikmati hasilnya.",
+      "Bahagia itu sederhana, yang rumit itu orangnya."
     ],
     neutral: [
-      "Hidup adalah perjalanan, bukan tujuan."
+      "Hidup adalah perjalanan, bukan tujuan.",
+      "Setiap hari membawa peluang yang berbeda.",
+      "Waktu terus berjalan, terlepas dari apa yang kita rasakan.",
+      "Perubahan adalah satu-satunya yang konstan dalam hidup.",
+      "Apa yang terjadi, terjadilah untuk alasan tertentu.",
+      "Kita tidak bisa mengontrol segalanya, tapi bisa mengontrol respons kita.",
+      "Kadang jalan terbaik adalah terus melangkah.",
+      "Hidup tidak harus selalu bermakna, kadang cukup dijalani saja.",
+      "Setiap detik berlalu membawa kita ke momen berikutnya.",
+      "Kesederhanaan adalah keindahan tersendiri."
     ],
     angry: [
-      "Marah itu wajar, tapi jangan biarkan ia mengendalikanmu."
+      "Marah itu wajar, tapi jangan biarkan ia mengendalikanmu.",
+      "Tarik napas dalam-dalam, hembuskan pelan-pelan.",
+      "Amarah yang tidak dikelola akan melukai diri sendiri.",
+      "Tenang adalah kekuatan terbesar di tengah badai emosi.",
+      "Orang yang marah-marah seperti memegang bara api untuk dilempar ke orang lain.",
+      "Kekuatan sejati bukan tentang meledak, tapi tetap tenang.",
+      "Lepaskan yang tidak bisa kau ubah, fokus pada yang bisa.",
+      "Kadang diam adalah jawaban terkuat saat marah.",
+      "Amarah adalah asam yang merusak wadahnya sendiri.",
+      "Emosi negatif adalah tamu, jangan jadikan ia penghuni tetap."
     ]
   },
   en: {
     sad: [
-      "Sometimes tears are words the heart can't express."
+      "Sometimes tears are words the heart can't express.",
+      "Sadness is life's way of giving you time to appreciate happiness.",
+      "In darkness, the stars shine brightest.",
+      "Every tear that falls teaches us to be stronger.",
+      "Today's pain is tomorrow's strength.",
+      "Rain doesn't last forever, neither does your sadness.",
+      "Healed wounds leave scars that remind us how strong we are.",
+      "Sometimes we must break to rebuild ourselves better.",
+      "Behind every sadness, there's a lesson waiting to be learned.",
+      "Let yourself feel, then let yourself heal."
     ],
     happy: [
-      "Happiness isn't about having everything, but being grateful for what we have."
+      "Happiness isn't about having everything, but being grateful for what we have.",
+      "A smile is a universal language everyone understands.",
+      "Today is a gift, that's why it's called the present.",
+      "Happiness multiplies when we share it.",
+      "Every day is a new opportunity to be happy.",
+      "Life is too short not to enjoy every moment.",
+      "Happiness comes from within, not from outside.",
+      "Laughter is the best medicine that needs no prescription.",
+      "Be grateful for the process, enjoy the results.",
+      "Happiness is simple, people make it complicated."
     ],
     neutral: [
-      "Life is a journey, not a destination."
+      "Life is a journey, not a destination.",
+      "Every day brings different opportunities.",
+      "Time keeps moving, regardless of how we feel.",
+      "Change is the only constant in life.",
+      "What happens, happens for a reason.",
+      "We can't control everything, but we can control our response.",
+      "Sometimes the best path is to keep walking.",
+      "Life doesn't always have to be meaningful, sometimes it's enough to just live it.",
+      "Every passing second brings us to the next moment.",
+      "Simplicity is its own beauty."
     ],
     angry: [
-      "Anger is normal, but don't let it control you."
+      "Anger is normal, but don't let it control you.",
+      "Take a deep breath, exhale slowly.",
+      "Unmanaged anger will hurt yourself.",
+      "Calm is the greatest strength in an emotional storm.",
+      "Being angry is like holding a hot coal to throw at someone else.",
+      "True strength isn't about exploding, but staying calm.",
+      "Let go of what you can't change, focus on what you can.",
+      "Sometimes silence is the strongest answer when angry.",
+      "Anger is an acid that damages its own container.",
+      "Negative emotions are guests, don't make them permanent residents."
     ]
   }
 };
