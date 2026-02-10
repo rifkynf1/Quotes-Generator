@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoodQuotes - Random Quotes Based on Mood</title>
+    <link rel="icon" type="image/png" href="💭" />
+    <meta
+      name="description"
+      content="Generate random quotes based on your mood and language. Available in Indonesian and English."
+    />
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💭</text></svg>"
+    />
+
+    <!-- Tailwind CSS v4 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+            animation: {
+              "fade-in": "fadeIn 0.3s ease-out",
+              "slide-up": "slideUp 0.4s ease-out",
+              "pulse-soft": "pulseSoft 2s ease-in-out infinite",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulseSoft {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+
+      /* Scrollbar Styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(139, 92, 246, 0.3);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(139, 92, 246, 0.5);
+      }
+
+      /* Glass Effect Improved for Dark Mode */
+      .glass {
+        /* Darker background for better contrast in dark mode */
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+          0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      }
+
+      .glass-light {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Mood Pill Styles */
+      .mood-pill {
+        transition: all 0.3s ease;
+      }
+      .mood-pill:hover {
+        transform: translateY(-2px);
+      }
+      .mood-pill.active {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen font-sans transition-colors duration-500 bg-gradient-to-br from-white via-pink-50 to-rose-50 dark:from-purple-950 dark:via-black dark:to-blue-950 text-zinc-800 dark:text-white/95"
+  >
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-4 py-4">
+      <div
+        class="max-w-5xl mx-auto flex items-center justify-between dark:bg-slate-800 glass-light dark:glass rounded-2xl px-6 py-3"
+      >
+        <!-- Brand -->
+        <a href="#" class="flex items-center gap-2 group">
+          <span class="text-2xl">💭</span>
+          <span
+            class="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent"
+          >
+            MoodQuotes
+          </span>
+        </a>
+
+        <!-- Theme Toggle -->
+        <button
+          id="themeToggle"
+          class="relative w-14 h-8 rounded-full bg-zinc-200 dark:bg-white/10 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-transparent cursor-pointer"
+          aria-label="Toggle theme"
+        >
+          <span
+            class="absolute left-1 top-1 w-6 h-6 rounded-full bg-white dark:bg-purple-500 shadow-lg transition-all duration-300 dark:translate-x-6 flex items-center justify-center text-sm"
+          >
+            <span class="dark:hidden">☀️</span>
+            <span class="hidden dark:inline">🌙</span>
+          </span>
+        </button>
+      </div>
+    </nav>
+
+    <main class="pt-24">
+      <!-- Hero Section -->
+      <section
+        id="hero"
+        class="min-h-[80vh] flex items-center justify-center px-4 py-16"
+      >
+        <div
+          class="max-w-4xl mx-auto text-center animate-[slideUp_0.6s_ease-out]"
+        >
+          <!-- Decorative Elements -->
+          <div
+            class="absolute top-32 left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl animate-pulse-soft"
+          ></div>
+          <div
+            class="absolute top-48 right-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl animate-pulse-soft"
+            style="animation-delay: 1s"
+          ></div>
+
+          <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+            <span
+              class="bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 bg-clip-text text-transparent"
+            >
+              Random Quotes
+            </span>
+            <br />
+            <span class="text-zinc-700 dark:text-white/90" data-i18n="subtitle"
+              >Sesuai Mood-mu</span
+            >
+          </h1>
+
+          <p
+            class="text-xl md:text-2xl text-zinc-600 dark:text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed"
+            data-i18n="description"
+          >
+            Find the right words for every mood.
+            <span class="text-purple-600 dark:text-purple-400 font-medium"
+              >Bilingual</span
+            >,
+            <span class="text-blue-600 dark:text-blue-400 font-medium"
+              >instant</span
+            >, and
+            <span class="text-pink-600 dark:text-pink-400 font-medium"
+              >free</span
+            >.
+          </p>
+
+          <a
+            href="#generator"
+            class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold rounded-full shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105 transition-all duration-300 cursor-pointer"
+          >
+            <span data-i18n="startBtn">Start Now</span>
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section id="how-it-works" class="px-4 py-20">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+            <span
+              class="bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent"
+              data-i18n="howItWorksTitle"
+              >Cara Pakai</span
+            >
+          </h2>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            <!-- Step 1 -->
+            <div
+              class="glass-light dark:glass dark:bg-slate-800 rounded-3xl p-8 text-center hover:scale-105 transition-transform duration-300"
+            >
+              <div
+                class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg"
+              >
+                1
+              </div>
+              <h3
+                class="text-xl font-semibold mb-3 dark:text-white"
+                data-i18n="step1Title"
+              >
+                Pilih Mood
+              </h3>
+              <p class="text-zinc-600 dark:text-white/60" data-i18n="step1Desc">
+                Sedang sedih, senang, netral, atau lagi badmood? Pilih yang
+                sesuai!
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div
+              class="glass-light dark:glass dark:bg-slate-800 rounded-3xl p-8 text-center hover:scale-105 transition-transform duration-300"
+            >
+              <div
+                class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg"
+              >
+                2
+              </div>
+              <h3
+                class="text-xl font-semibold mb-3 dark:text-white"
+                data-i18n="step2Title"
+              >
+                Pilih Bahasa
+              </h3>
+              <p class="text-zinc-600 dark:text-white/60" data-i18n="step2Desc">
+                Indonesia atau English? Quotes tersedia dalam dua bahasa.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div
+              class="glass-light dark:glass dark:bg-slate-800 rounded-3xl p-8 text-center hover:scale-105 transition-transform duration-300"
+            >
+              <div
+                class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg"
+              >
+                3
+              </div>
+              <h3
+                class="text-xl font-semibold mb-3 dark:text-white"
+                data-i18n="step3Title"
+              >
+                Generate & Copy
+              </h3>
+              <p class="text-zinc-600 dark:text-white/60" data-i18n="step3Desc">
+                Klik generate, dapatkan quote random, dan copy untuk dibagikan!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section id="features" class="px-4 py-20 bg-white/50 dark:bg-white/5">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+            <span
+              class="bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent"
+              data-i18n="featuresTitle"
+              >Fitur Unggulan</span
+            >
+          </h2>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+              class="flex items-center gap-4 glass-light dark:glass dark:bg-slate-800 rounded-2xl p-5"
+            >
+              <span class="text-3xl">🌓</span>
+              <div>
+                <h4
+                  class="font-semibold dark:text-white"
+                  data-i18n="feature1Title"
+                >
+                  Dark/Light Mode
+                </h4>
+                <p
+                  class="text-sm text-zinc-500 dark:text-white/50"
+                  data-i18n="feature1Desc"
+                >
+                  Nyaman di mata
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="flex items-center gap-4 glass-light dark:glass dark:bg-slate-800 rounded-2xl p-5"
+            >
+              <span class="text-3xl">🌐</span>
+              <div>
+                <h4
+                  class="font-semibold dark:text-white"
+                  data-i18n="feature2Title"
+                >
+                  Bilingual
+                </h4>
+                <p
+                  class="text-sm text-zinc-500 dark:text-white/50"
+                  data-i18n="feature2Desc"
+                >
+                  ID & EN
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="flex items-center gap-4 glass-light dark:glass dark:bg-slate-800 rounded-2xl p-5"
+            >
+              <span class="text-3xl">🎲</span>
+              <div>
+                <h4
+                  class="font-semibold dark:text-white"
+                  data-i18n="feature3Title"
+                >
+                  Smart Random
+                </h4>
+                <p
+                  class="text-sm text-zinc-500 dark:text-white/50"
+                  data-i18n="feature3Desc"
+                >
+                  Tidak berulang
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="flex items-center gap-4 glass-light dark:glass dark:bg-slate-800 rounded-2xl p-5"
+            >
+              <span class="text-3xl">📋</span>
+              <div>
+                <h4
+                  class="font-semibold dark:text-white"
+                  data-i18n="feature4Title"
+                >
+                  One-Click Copy
+                </h4>
+                <p
+                  class="text-sm text-zinc-500 dark:text-white/50"
+                  data-i18n="feature4Desc"
+                >
+                  Langsung share
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Generator Form -->
+      <section id="generator" class="px-4 py-20">
+        <div class="max-w-2xl mx-auto">
+          <div
+            class="glass-light dark:glass dark:bg-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl shadow-purple-500/10 dark:shadow-black/40"
+          >
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">
+              <span
+                class="bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent"
+                data-i18n="generatorTitle"
+                >Generate Quote</span
+              >
+            </h2>
+
+            <!-- Mood Selection -->
+            <div class="mb-8">
+              <label
+                class="block text-sm font-medium mb-4 text-zinc-600 dark:text-white/80"
+                data-i18n="selectMoodLabel"
+                >Pilih Mood</label
+              >
+              <div id="moodGroup" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <label class="mood-pill cursor-pointer">
+                  <input
+                    type="radio"
+                    name="mood"
+                    value="sad"
+                    class="sr-only peer"
+                  />
+                  <div
+                    class="peer-checked:bg-gradient-to-r peer-checked:from-blue-500 peer-checked:to-blue-600 peer-checked:text-white peer-checked:border-transparent bg-white/50 dark:bg-slate-800/50 border-2 border-zinc-200 dark:border-white/10 rounded-xl p-4 text-center transition-all hover:border-blue-400 dark:hover:border-blue-500 dark:text-white/80"
+                  >
+                    <span class="text-2xl block mb-1">😢</span>
+                    <span class="text-sm font-medium" data-i18n="moodSad"
+                      >Sedih</span
+                    >
+                  </div>
+                </label>
+
+                <label class="mood-pill cursor-pointer">
+                  <input
+                    type="radio"
+                    name="mood"
+                    value="happy"
+                    class="sr-only peer"
+                  />
+                  <div
+                    class="peer-checked:bg-gradient-to-r peer-checked:from-yellow-400 peer-checked:to-orange-400 peer-checked:text-white peer-checked:border-transparent bg-white/50 dark:bg-slate-800/50 border-2 border-zinc-200 dark:border-white/10 rounded-xl p-4 text-center transition-all hover:border-yellow-400 dark:hover:border-yellow-500 dark:text-white/80"
+                  >
+                    <span class="text-2xl block mb-1">😊</span>
+                    <span class="text-sm font-medium" data-i18n="moodHappy"
+                      >Senang</span
+                    >
+                  </div>
+                </label>
+
+                <label class="mood-pill cursor-pointer">
+                  <input
+                    type="radio"
+                    name="mood"
+                    value="neutral"
+                    class="sr-only peer"
+                  />
+                  <div
+                    class="peer-checked:bg-gradient-to-r peer-checked:from-gray-400 peer-checked:to-gray-500 peer-checked:text-white peer-checked:border-transparent bg-white/50 dark:bg-slate-800/50 border-2 border-zinc-200 dark:border-white/10 rounded-xl p-4 text-center transition-all hover:border-gray-400 dark:hover:border-gray-500 dark:text-white/80"
+                  >
+                    <span class="text-2xl block mb-1">😐</span>
+                    <span class="text-sm font-medium" data-i18n="moodNeutral"
+                      >Netral</span
+                    >
+                  </div>
+                </label>
+
+                <label class="mood-pill cursor-pointer">
+                  <input
+                    type="radio"
+                    name="mood"
+                    value="angry"
+                    class="sr-only peer"
+                  />
+                  <div
+                    class="peer-checked:bg-gradient-to-r peer-checked:from-red-500 peer-checked:to-red-600 peer-checked:text-white peer-checked:border-transparent bg-white/50 dark:bg-slate-800/50 border-2 border-zinc-200 dark:border-white/10 rounded-xl p-4 text-center transition-all hover:border-red-400 dark:hover:border-red-500 dark:text-white/80"
+                  >
+                    <span class="text-2xl block mb-1">😠</span>
+                    <span class="text-sm font-medium" data-i18n="moodAngry"
+                      >Marah</span
+                    >
+                  </div>
+                </label>
+              </div>
+              <p
+                id="moodError"
+                class="text-red-500 text-sm mt-2 hidden"
+                data-i18n="moodError"
+              >
+                ⚠️ Pilih mood terlebih dahulu
+              </p>
+            </div>
+
+            <!-- Language Selection -->
+            <div class="mb-10">
+              <label
+                class="block text-sm font-medium mb-4 text-zinc-600 dark:text-white/80"
+                data-i18n="selectLangLabel"
+                >Pilih Bahasa</label
+              >
+              <div id="langGroup" class="flex gap-3">
+                <label class="flex-1 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="lang"
+                    value="en"
+                    class="sr-only peer"
+                    checked
+                  />
+                  <div
+                    class="peer-checked:bg-gradient-to-r peer-checked:from-purple-500 peer-checked:to-purple-600 peer-checked:text-white peer-checked:border-transparent bg-white/50 dark:bg-slate-800/50 border-2 border-zinc-200 dark:border-white/10 rounded-xl p-4 text-center transition-all hover:border-purple-400 dark:text-white/80 flex flex-col items-center justify-center"
+                  >
+                    <!-- USA Flag SVG -->
+                    <svg
+                      class="w-8 h-8 mb-2 rounded shadow-sm"
+                      viewBox="0 0 640 480"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path fill="#bd3d44" d="M0 0h640v480H0" />
+                      <path
+                        stroke="#fff"
+                        stroke-width="37"
+                        d="M0 55.3h640M0 129h640M0 203h640M0 277h640M0 351h640M0 425h640"
+                      />
+                      <path fill="#192f5d" d="M0 0h296.2v258.5H0" />
+                      <marker id="us_a" markerHeight="30" markerWidth="30">
+                        <path
+                          fill="#fff"
+                          d="M14.7 0l2.6 8h8.4l-7 4.9 2.6 8.2-6.8-5L7.7 21l2.6-8.2-7-5 8.4-.2z"
+                        />
+                      </marker>
+                      <path
+                        fill="#fff"
+                        d="M22.2 24.3l9.9 31.8h-4.8l-7.7-25-7.7 25H7.1l9.9-31.8zm3.6 7.5L20.3 48l-5.6-16.2z"
+                      />
+                      <!-- Simplified US Stars for better rendering stability -->
+                      <g fill="#fff">
+                        <circle cx="25" cy="20" r="10" />
+                        <circle cx="75" cy="20" r="10" />
+                        <circle cx="125" cy="20" r="10" />
+                        <circle cx="175" cy="20" r="10" />
+                        <circle cx="225" cy="20" r="10" />
+                        <circle cx="275" cy="20" r="10" />
+
+                        <circle cx="50" cy="50" r="10" />
+                        <circle cx="100" cy="50" r="10" />
+                        <circle cx="150" cy="50" r="10" />
+                        <circle cx="200" cy="50" r="10" />
+                        <circle cx="250" cy="50" r="10" />
+
+                        <circle cx="25" cy="80" r="10" />
+                        <circle cx="75" cy="80" r="10" />
+                        <circle cx="125" cy="80" r="10" />
+                        <circle cx="175" cy="80" r="10" />
+                        <circle cx="225" cy="80" r="10" />
+                        <circle cx="275" cy="80" r="10" />
+
+                        <circle cx="50" cy="110" r="10" />
+                        <circle cx="100" cy="110" r="10" />
+                        <circle cx="150" cy="110" r="10" />
+                        <circle cx="200" cy="110" r="10" />
+                        <circle cx="250" cy="110" r="10" />
+                      </g>
+                    </svg>
+                    <span class="text-sm font-medium">English</span>
+                  </div>
+                </label>
+
+                <label class="flex-1 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="lang"
+                    value="id"
+                    class="sr-only peer"
+                  />
+                  <div
+                    class="peer-checked:bg-gradient-to-r peer-checked:from-purple-500 peer-checked:to-purple-600 peer-checked:text-white peer-checked:border-transparent bg-white/50 dark:bg-slate-800/50 border-2 border-zinc-200 dark:border-white/10 rounded-xl p-4 text-center transition-all hover:border-purple-400 dark:text-white/80 flex flex-col items-center justify-center"
+                  >
+                    <!-- ID Flag SVG -->
+                    <svg
+                      class="w-8 h-8 mb-2 rounded shadow-sm border border-zinc-100 dark:border-white/10"
+                      viewBox="0 0 640 480"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path fill="#e00000" d="M0 0h640v240H0z" />
+                      <path fill="#fff" d="M0 240h640v240H0z" />
+                    </svg>
+                    <span class="text-sm font-medium">Indonesia</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Generate Button -->
+            <button
+              id="generateBtn"
+              class="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold text-lg rounded-xl shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+              <span data-i18n="generateBtn">Generate Quote</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="px-4 py-8 text-center border-t border-zinc-200 dark:border-white/10"
+    >
+      <p
+        class="text-sm text-zinc-500 dark:text-white/50"
+        data-i18n="footerText"
+      >
+        Made with 💜 by
+        <span class="font-medium text-purple-600 dark:text-purple-400"
+          >MHR Developer</span
+        >
+        • 2026
+      </p>
+    </footer>
+
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="fixed inset-0 z-[100] hidden">
+      <!-- Overlay -->
+      <div
+        id="modalOverlay"
+        class="absolute inset-0 bg-black/70 backdrop-blur-sm"
+      ></div>
+
+      <!-- Modal Content -->
+      <div class="absolute inset-0 flex items-center justify-center p-4">
+        <div
+          class="relative w-full max-w-lg glass-light dark:glass dark:bg-slate-800 rounded-3xl p-8 md:p-10 shadow-2xl animate-[slideUp_0.3s_ease-out]"
+        >
+          <!-- Close Button -->
+          <button
+            id="closeModalBtn"
+            class="absolute top-4 right-4 w-10 h-10 rounded-full bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 flex items-center justify-center transition-colors dark:text-white cursor-pointer"
+            aria-label="Close modal"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          <!-- Quote Icon -->
+          <div class="text-center mb-6">
+            <span class="text-5xl opacity-30 dark:text-white">❝</span>
+          </div>
+
+          <!-- Quote Text -->
+          <p
+            id="quoteText"
+            class="text-xl md:text-2xl font-medium text-center leading-relaxed mb-6 dark:text-white"
+          >
+            Quote akan muncul di sini...
+          </p>
+
+          <!-- Quote Meta -->
+          <p
+            id="quoteMeta"
+            class="text-center text-sm text-zinc-500 dark:text-white/60 mb-8"
+          >
+            Mood: — • Bahasa: —
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row gap-3">
+            <button
+              id="generateAgainBtn"
+              class="flex-1 py-3 px-6 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold rounded-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+              <span data-i18n="btnGenerateAgain">Generate Lagi</span>
+            </button>
+
+            <button
+              id="copyBtn"
+              class="flex-1 py-3 px-6 bg-zinc-100 dark:bg-white/10 text-zinc-700 dark:text-white font-semibold rounded-xl hover:bg-zinc-200 dark:hover:bg-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                />
+              </svg>
+              <span data-i18n="btnCopy">Copy</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div
+      id="toast"
+      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[110] hidden"
+    >
+      <div
+        class="px-6 py-3 bg-green-500 text-white font-medium rounded-full shadow-lg flex items-center gap-2 animate-[slideUp_0.3s_ease-out]"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+        <span id="toastMessage">Copied!</span>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
