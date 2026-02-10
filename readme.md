@@ -27,6 +27,27 @@
 
 ---
 
+## 🎭 Available Moods
+
+| Mood    | Key       | Emoji |
+| :------ | :-------- | :---- |
+| Sad     | `sad`     | 😢    |
+| Happy   | `happy`   | 😊    |
+| Neutral | `neutral` | 😐    |
+| Angry   | `angry`   | 😠    |
+
+---
+
+## ♿ Accessibility
+
+- ✅ **ESC** to close modal
+- ✅ Light focus trap on modal (focus on primary button)
+- ✅ Semantic HTML with clear labels
+- ✅ Adequate color contrast for both themes
+- ✅ `aria-label` on icon buttons
+
+---
+
 ## 🛠️ Tech Stack
 
 - **HTML5** - Semantic structure
