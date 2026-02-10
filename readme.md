@@ -27,6 +27,38 @@
 
 ---
 
+## 🚀 How to Run
+
+Clone the repository first:
+
+```bash
+git clone https://github.com/username/quotes-generator.git
+cd quotes-generator
+```
+
+Then simply open `index.html` in your favorite browser:
+
+```bash
+start index.html        # Windows
+open index.html         # macOS
+xdg-open index.html     # Linux
+```
+
+**No installation, build, or server required!** This project is pure HTML + CSS + JS.
+
+---
+
+## 📁 Folder Structure
+
+```
+quotes-generator/
+├── index.html      # Main entry point
+├── script.js       # Logic & quotes data
+└── README.md       # Documentation
+```
+
+---
+
 ## 🎭 Available Moods
 
 | Mood    | Key       | Emoji |
